@@ -90,14 +90,14 @@ def binomial_model(S0, K, T, r, sigma, N,
 
 
 # Example
-S0 = 3246.23
-K = 2000
-T = 21/252
-r = 0.025
-div = 0.015
-sigma = 0.1498878078948466
-N = 21
-print(binomial_model(S0, K, T, r, sigma, N, option='call', div=div, european=True, method='crr'))
-print(binomial_model(S0, K, T, r, sigma, N, option='call', div=div, european=True, method='jr'))
-# print(binomial_model(S0, K, T, r, sigma, N, option='call', div=div, european=False, method='crr'))
+# S0 = 3246.23
+# K = 2000
+# T = 21/252
+# r = 0.025
+# div = 0.015
+# sigma = 0.1498878078948466
+# N = 21
+# print(binomial_model(S0, K, T, r, sigma, N, option='call', div=div, european=True, method='crr'))
+# print(binomial_model(S0, K, T, r, sigma, N, option='call', div=div, european=True, method='jr'))
+
 
