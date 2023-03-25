@@ -48,6 +48,10 @@ def binomial_model(S0, K, T, r, sigma, N,
         u = np.exp((r-div-0.5*sigma**2)*dt+sigma*np.sqrt(dt))
         d = np.exp((r-div-0.5*sigma**2)*dt-sigma*np.sqrt(dt))
         p = 0.5
+
+    # custom method
+    # elif:
+
     else:
         raise ValueError('method not recognized')
 
