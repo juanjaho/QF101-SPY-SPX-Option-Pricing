@@ -39,8 +39,15 @@ def calculate_profit(df_input, long_call = True, short_call = True, long_put = T
     long_put = 1 if long_put else 0
     short_put = -1 if short_put else 0
     
-    df_input['LONG_CALL'] = np.where(df_input['CALL'] > df_input['C_PRICE'], long_call, short_call)
-    df_input['LONG_PUT'] = np.where(df_input['PUT'] > df_input['P_PRICE'], long_put, short_put)
+    # df_input['LONG_CALL'] = np.where(df_input['CALL'] > df_input['C_PRICE'], long_call, short_call)
+    # df_input['LONG_PUT'] = np.where(df_input['PUT'] > df_input['P_PRICE'], long_put, short_put)
+    dcall = (df_input['CALL'] - df_input['C_PRICE'])/df_input['C_PRICE']
+    dput = (df_input['PUT'] - df_input['P_PRICE'])/df_input['P_PRICE']
+
+    df_input['LONG_CALL'] = np.where(dcall > 0, np.where(dcall <= 0.1, long_call, 0), np.where(dcall >= -0.1, short_call, 0))
+    df_input['LONG_PUT'] = np.where(dput > 0, np.where(dput <= 0.1, long_put, 0), np.where(dput >= -0.1, short_put, 0))
+
+
     df_input['PROFIT_LOSS_ON_PURCHASE_CALL'] = -(df_input['LONG_CALL']*df_input['C_PRICE'])
     df_input['PROFIT_LOSS_ON_PURCHASE_PUT'] = -(df_input['LONG_PUT']*df_input['P_PRICE'])
     df_input['PROFIT_LOSS_ON_PURCHASE'] = df_input['PROFIT_LOSS_ON_PURCHASE_CALL'] + df_input['PROFIT_LOSS_ON_PURCHASE_PUT']
