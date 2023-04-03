@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-def calculate_profit(df_input, long_call = True, short_call = True, long_put = True, short_put = True)->pd.DataFrame:
+def calculate_profit(df_input, long_call = True, short_call = True, long_put = True, short_put = True, deviation = float('inf'))->pd.DataFrame:
     '''
     Calculate profit/loss of a long/short call/put option
     ======================
@@ -15,6 +15,8 @@ def calculate_profit(df_input, long_call = True, short_call = True, long_put = T
         True if allow long put option
     short_put: boolean
         True if allow short put option
+    deviation: float
+        The deviation of the price from the strike price to allow long/short call/put option
 
     ======================
 
@@ -44,8 +46,8 @@ def calculate_profit(df_input, long_call = True, short_call = True, long_put = T
     dcall = (df_input['CALL'] - df_input['C_PRICE'])/df_input['C_PRICE']
     dput = (df_input['PUT'] - df_input['P_PRICE'])/df_input['P_PRICE']
 
-    df_input['LONG_CALL'] = np.where(dcall > 0, np.where(dcall <= 0.1, long_call, 0), np.where(dcall >= -0.1, short_call, 0))
-    df_input['LONG_PUT'] = np.where(dput > 0, np.where(dput <= 0.1, long_put, 0), np.where(dput >= -0.1, short_put, 0))
+    df_input['LONG_CALL'] = np.where(dcall > 0, np.where(dcall <= deviation, long_call, 0), np.where(dcall >= -deviation, short_call, 0))
+    df_input['LONG_PUT'] = np.where(dput > 0, np.where(dput <= deviation, long_put, 0), np.where(dput >= -deviation, short_put, 0))
 
 
     df_input['PROFIT_LOSS_ON_PURCHASE_CALL'] = -(df_input['LONG_CALL']*df_input['C_PRICE'])
