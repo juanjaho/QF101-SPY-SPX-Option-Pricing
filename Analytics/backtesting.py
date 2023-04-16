@@ -62,11 +62,14 @@ def calculate_profit(df_input, long_call = True, short_call = True, long_put = T
 
     return df_input
 
-
-def max_drawdown(return_series):
+def drawdown(return_series):
     comp_ret = (return_series+1).cumprod()
     peak = comp_ret.expanding(min_periods=1).max()
     dd = (comp_ret/peak)-1
+    return dd
+
+def max_drawdown(return_series):
+    dd = drawdown(return_series)
     return dd.min()
 
 def sharpe_ratio(return_series, rf, N=252):
