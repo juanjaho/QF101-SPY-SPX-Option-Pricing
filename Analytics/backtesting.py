@@ -61,3 +61,20 @@ def calculate_profit(df_input, long_call = True, short_call = True, long_put = T
     df_input['PROFIT_LOSS'] = df_input['PROFIT_LOSS_ON_SALE'] + df_input['PROFIT_LOSS_ON_PURCHASE']
 
     return df_input
+
+
+def max_drawdown(return_series):
+    comp_ret = (return_series+1).cumprod()
+    peak = comp_ret.expanding(min_periods=1).max()
+    dd = (comp_ret/peak)-1
+    return dd.min()
+
+def sharpe_ratio(return_series, rf, N=252):
+    mean = return_series.mean() * N -rf
+    sigma = return_series.std() * np.sqrt(N)
+    return mean / sigma
+
+def calmars_ratio(return_series, rf, N=252):
+    mean = return_series.mean() * N -rf
+    dd = max_drawdown(return_series)
+    return mean / abs(dd)
