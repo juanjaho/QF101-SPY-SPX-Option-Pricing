@@ -17,7 +17,8 @@ Compare the difference in option pricing between European and American options w
     ```
 
 ## Project Report and Presentation
-[QF101 Project Report](QF101 Project Report.pdf)
-[QF101 Project Presentation](QF101 Project Presentation.pdf)
+- [QF101 Project Report](/QF101%20Project%20Report.pdf)
+- [QF101 Project Presentation](/QF101%20Project%20Presentation.pdf)
+<!-- add url -->
 
     
