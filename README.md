@@ -16,3 +16,8 @@ Compare the difference in option pricing between European and American options w
     conda install --file requirements.txt
     ```
 
+## Project Report and Presentation
+[QF101 Project Report](QF101 Project Report.pdf)
+[QF101 Project Presentation](QF101 Project Presentation.pdf)
+
+    
